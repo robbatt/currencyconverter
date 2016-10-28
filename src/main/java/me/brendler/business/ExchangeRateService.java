@@ -17,8 +17,9 @@ public class ExchangeRateService {
     public ExchangeRates getExchangeRates(String base) {
         Client client = ClientBuilder.newBuilder().newClient();
         WebTarget target = client.target("http://api.fixer.io");
-        target = target.path("/latest");
-        // .queryParam("base", "USD");
+        target = target
+                .path("/latest")
+                .queryParam("base", base);
         // .queryParam("symbols", "USD,EUR,JPY");
 
         Invocation.Builder builder = target.request();
