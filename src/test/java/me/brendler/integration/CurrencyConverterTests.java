@@ -1,4 +1,4 @@
-package me.brendler;
+package me.brendler.integration;
 
 import com.jayway.restassured.RestAssured;
 import org.junit.Before;
