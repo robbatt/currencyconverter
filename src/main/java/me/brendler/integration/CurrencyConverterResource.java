@@ -22,8 +22,8 @@ public class CurrencyConverterResource {
 
     @RequestMapping(method = GET)
     public Double convert(HttpServletResponse response,
-                          @RequestParam("fromCurrency") String fromCurrency,
-                          @RequestParam("toCurrency") String toCurrency,
+                          @RequestParam("from") String fromCurrency,
+                          @RequestParam("to") String toCurrency,
                           @RequestParam("amount") Double amount) {
         return currencyConverterService.convert(fromCurrency, toCurrency, amount);
     }
