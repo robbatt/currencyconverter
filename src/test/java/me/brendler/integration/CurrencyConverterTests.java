@@ -9,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 
 import static com.jayway.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
 @WebAppConfiguration
@@ -59,6 +61,25 @@ public class CurrencyConverterTests {
                 .get("/convert")
         .then()
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .log().body()
+        ;
+        // @formatter:on
+    }
+
+    @Test
+    public void testGetNotOkMissingParam() throws Exception {
+        // @formatter:off
+        given()
+                .request()
+                .contentType(MediaType.APPLICATION_JSON_UTF8.toString())
+				.param("amount", 1.0)
+				.param("to", "USD")
+                .log().all()
+        .when()
+                .get("/convert")
+        .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("exception", is(MissingServletRequestParameterException.class.getName()))
                 .log().body()
         ;
         // @formatter:on
