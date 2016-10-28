@@ -7,7 +7,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
 
 /**
  * Created on 28.10.2016.
@@ -23,7 +22,6 @@ public class ExchangeRateService {
                 .queryParam("base", base);
 
         Invocation.Builder builder = target.request();
-        Response response = builder.get();
         ExchangeRates exchangeRates = builder.get(ExchangeRates.class);
         return exchangeRates;
     }

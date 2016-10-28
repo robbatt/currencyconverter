@@ -17,8 +17,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RequestMapping(value = "/convert")
 public class CurrencyConverterResource {
 
+    private final CurrencyConverterService currencyConverterService;
+
     @Autowired
-    CurrencyConverterService currencyConverterService;
+    public CurrencyConverterResource(CurrencyConverterService currencyConverterService) {
+        this.currencyConverterService = currencyConverterService;
+    }
 
     @RequestMapping(method = GET)
     public Double convert(HttpServletResponse response,

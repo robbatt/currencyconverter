@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class CurrencyConverterService {
 
+    private final ExchangeRateService exchangeRateService;
+
     @Autowired
-    ExchangeRateService exchangeRateService;
+    public CurrencyConverterService(ExchangeRateService exchangeRateService) {
+        this.exchangeRateService = exchangeRateService;
+    }
 
     public Double convert(String fromCurrency, String toCurrency, Double amount) {
         ExchangeRates rates = exchangeRateService.getExchangeRates(fromCurrency);
-        Double convertedAmount = rates.getRates().get(toCurrency) * amount;
-        return convertedAmount;
+        Float conversionRate = rates.getRates().get(toCurrency);
+        return conversionRate * amount;
     }
 }
