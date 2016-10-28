@@ -1,5 +1,6 @@
 package me.brendler.business;
 
+import me.brendler.model.ExchangeRates;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.client.Client;
