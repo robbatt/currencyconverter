@@ -20,7 +20,6 @@ public class ExchangeRateService {
         target = target
                 .path("/latest")
                 .queryParam("base", base);
-        // .queryParam("symbols", "USD,EUR,JPY");
 
         Invocation.Builder builder = target.request();
         Response response = builder.get();

@@ -45,4 +45,23 @@ public class CurrencyConverterTests {
         // @formatter:on
     }
 
+    @Test
+    public void testGetNotOkInvalidFromCurrency() throws Exception {
+        // @formatter:off
+        given()
+                .request()
+                .contentType(MediaType.APPLICATION_JSON_UTF8.toString())
+				.param("amount", 1.0)
+				.param("from", "ABC")
+				.param("to", "USD")
+                .log().all()
+        .when()
+                .get("/convert")
+        .then()
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .log().body()
+        ;
+        // @formatter:on
+    }
+
 }
